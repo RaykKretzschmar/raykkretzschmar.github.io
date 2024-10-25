@@ -83,9 +83,14 @@ section {
     transition: color 0.3s ease;
 }
 
+.project-card a {
+    text-decoration: none;
+    /* Remove underline */
+}
+
 .project-card a:hover h3 {
-    color: #007BFF;
-    /* Change to the color of your choice on hover */
+    color: #266e18;
+    text-decoration: none;
 }
 
 .project-card {
@@ -155,8 +160,6 @@ section {
     opacity: 1;
     transition: opacity 0.5s ease-in;
 }
-
-/* Existing CSS remains unchanged */
 
 /* Social Media Links Styling */
 .social-media {
