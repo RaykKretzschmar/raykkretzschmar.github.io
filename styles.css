@@ -41,6 +41,10 @@ nav {
     text-decoration: none;
 }
 
+.nav-links a:hover {
+    color: #ddd;
+}
+
 .burger {
     display: none;
     cursor: pointer;
