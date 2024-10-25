@@ -69,6 +69,64 @@ section {
     background-color: #f4f4f4;
 }
 
+/* Hero Section */
+.hero {
+    background: linear-gradient(to right, #266e18, #00C6FF);
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.cta-button {
+    background-color: #fff;
+    color: #007BFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Home Details Section */
+.home-details {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.detail-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    text-align: center;
+}
+
+.detail-card h3 {
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+
 #projects {
     background-color: #e2e2e2;
 }
@@ -89,7 +147,7 @@ section {
 }
 
 .project-card a:hover h3 {
-    color: #266e18;
+    color: #007BFF;
     text-decoration: none;
 }
 
