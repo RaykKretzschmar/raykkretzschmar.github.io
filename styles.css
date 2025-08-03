@@ -71,7 +71,7 @@ section {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(to right, #266e18, #00C6FF);
+    background: linear-gradient(to right, #333, #333);
     color: #fff;
     padding: 60px 20px;
     text-align: center;
@@ -91,7 +91,7 @@ section {
 
 .cta-button {
     background-color: #fff;
-    color: #007BFF;
+    color: #333;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -122,7 +122,7 @@ section {
 }
 
 .detail-card h3 {
-    color: #007BFF;
+    color: #333;
     margin-bottom: 10px;
 }
 
@@ -190,12 +190,12 @@ section {
 }
 
 #impressum h2 {
-    color: #007BFF;
+    color: #333;
     margin-bottom: 20px;
 }
 
 #impressum a {
-    color: #007BFF;
+    color: #333;
     text-decoration: none;
 }
 
@@ -280,4 +280,29 @@ section {
         margin-top: auto;
         padding-bottom: 40px;
     }
+}
+
+/* Hide the default triangle */
+details summary {
+    list-style: none;
+}
+
+/* Remove extra space where triangle used to be (for some browsers) */
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Optional: Make it look clickable */
+details summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.detail-card a {
+    color: #333;
+}
+
+.detail-card a:hover {
+    color: #666;
+    text-decoration: underline;
 }
