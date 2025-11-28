@@ -33,7 +33,7 @@ nav {
     color: var(--text-light);
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -81,7 +81,8 @@ nav {
 section {
     padding: 80px 20px;
     min-height: 100vh;
-    scroll-margin-top: var(--nav-height); /* Fix for fixed header overlap */
+    scroll-margin-top: var(--nav-height);
+    /* Fix for fixed header overlap */
 }
 
 #home {
@@ -98,7 +99,7 @@ section {
     padding: 80px 40px;
     text-align: center;
     border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
     width: 100%;
     max-width: 900px;
@@ -132,36 +133,141 @@ section {
     transform: translateY(-2px);
 }
 
-/* Home Details Section */
-.home-details {
+/* Background Section (Timeline & Skills) */
+.background-container {
     display: flex;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 40px;
     justify-content: center;
     width: 100%;
     max-width: 1200px;
+    margin-top: 40px;
 }
 
-.detail-card {
+.timeline {
+    flex: 2;
+    min-width: 300px;
+    position: relative;
+    padding-left: 40px;
+}
+
+/* Vertical Line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    bottom: 0;
+    width: 4px;
+    background-color: #bdc3c7;
+    /* Lighter grey for the line */
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -40px;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--card-bg-color);
+    border: 4px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 1;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.timeline-item:hover .timeline-dot {
+    transform: scale(1.2);
+    background-color: var(--accent-color);
+}
+
+.timeline-content {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-left: 4px solid var(--accent-color);
+}
+
+.timeline-content:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.timeline-content .institution {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.timeline-content .date {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #777;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 15px;
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+    color: #555;
+}
+
+/* Skills Card */
+.skills-card {
+    flex: 1;
+    min-width: 280px;
     background-color: var(--card-bg-color);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    width: 300px;
-    text-align: left;
-    transition: transform 0.3s;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    /* Sticky on desktop */
 }
 
-.detail-card:hover {
-    transform: translateY(-5px);
-}
-
-.detail-card h3 {
+.skills-card h3 {
     color: var(--primary-color);
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 10px;
     display: inline-block;
+}
+
+.skill-group {
+    margin-bottom: 20px;
+}
+
+.skill-group strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.skill-group p {
+    color: #555;
+    margin: 0;
 }
 
 #projects {
@@ -271,7 +377,7 @@ section {
         width: 60%;
         transform: translateX(100%);
         transition: transform 0.4s ease-in-out;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links li {
@@ -283,11 +389,12 @@ section {
         display: flex;
     }
 
-    .project-card, .detail-card {
+    .project-card,
+    .detail-card {
         width: 100%;
         max-width: 400px;
     }
-    
+
     .hero h1 {
         font-size: 2em;
     }
