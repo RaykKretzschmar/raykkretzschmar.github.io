@@ -36,4 +36,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start typing after a small delay
     setTimeout(typeWriter, 500);
+
+    // Scroll Animation for Timeline Items
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Animate only once
+            }
+        });
+    }, observerOptions);
+
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
 });

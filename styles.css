@@ -167,6 +167,16 @@ section {
 .timeline-item {
     position: relative;
     margin-bottom: 40px;
+    /* Animation trigger container */
+}
+
+.timeline-item.visible .timeline-dot {
+    transform: scale(1);
+}
+
+.timeline-item.visible .timeline-content {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .timeline-item:last-child {
@@ -183,7 +193,9 @@ section {
     border: 4px solid var(--accent-color);
     border-radius: 50%;
     z-index: 1;
-    transition: transform 0.3s, background-color 0.3s;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+    transform: scale(0);
+    /* Initial state */
 }
 
 .timeline-item:hover .timeline-dot {
@@ -196,8 +208,12 @@ section {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
     border-left: 4px solid var(--accent-color);
+    opacity: 0;
+    /* Initial state */
+    transform: translateX(30px);
+    /* Initial state */
 }
 
 .timeline-content:hover {
