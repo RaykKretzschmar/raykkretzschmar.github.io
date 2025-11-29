@@ -1,0 +1,20 @@
+{
+  "name": "rayk-portfolio-api",
+  "version": "1.0.0",
+  "description": "Serverless API for Rayk's Portfolio Chatbot",
+  "main": "api/chat.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rayk Kretzschmar",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vercel/node": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
