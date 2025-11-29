@@ -568,3 +568,55 @@ details[open] summary {
         opacity: 0;
     }
 }
+
+/* Contact Form Styling */
+.contact-form-container {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 40px auto 0;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.contact-form-container h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.contact-form-container button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+}

@@ -131,3 +131,46 @@ function addMessage(text, sender) {
     messagesContainer.insertBefore(messageDiv, typingIndicator);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+
+/* Contact Form Handling */
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    contactForm.reset();
+                } else {
+                    alert('Failed to send message: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while sending the message.');
+            } finally {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
+        });
+    }
+});
