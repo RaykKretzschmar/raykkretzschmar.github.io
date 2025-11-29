@@ -2,7 +2,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const SYSTEM_PROMPT = `
@@ -36,37 +36,39 @@ Context (Rayk's Resume & Portfolio):
 - **Hobbies:**
   - Mario Kart (Almost Top 100 in Europe).
   - Owning a cockatoo.
+  - Playing handball, running, strength training.
+  - Investing in stocks and startups.
 - **Contact:** kretzschmar.rayk@gmail.com, +49 160 99439389.
 
 If a user asks something not in this context (e.g., "What is the capital of France?" or "Write me a poem about cats"), politely decline and steer them back to Rayk's professional background.
 `;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-    const { message } = req.body;
+  const { message } = req.body;
 
-    if (!message) {
-        return res.status(400).json({ error: 'Message is required' });
-    }
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
+  }
 
-    try {
-        const completion = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
-            messages: [
-                { role: 'system', content: SYSTEM_PROMPT },
-                { role: 'user', content: message },
-            ],
-            max_tokens: 150,
-            temperature: 0.7,
-        });
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: message },
+      ],
+      max_tokens: 150,
+      temperature: 0.7,
+    });
 
-        const reply = completion.choices[0].message.content;
-        return res.status(200).json({ reply });
-    } catch (error) {
-        console.error('OpenAI API Error:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
-    }
+    const reply = completion.choices[0].message.content;
+    return res.status(200).json({ reply });
+  } catch (error) {
+    console.error('OpenAI API Error:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
