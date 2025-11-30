@@ -19,9 +19,9 @@ class Body {
         this.maxTrailLength = 50;
     }
 
-    draw(ctx, width, height) {
-        const x = width / 2 + this.x / SCALE;
-        const y = height / 2 - this.y / SCALE;
+    draw(ctx, width, height, cameraX, cameraY) {
+        const x = width / 2 + this.x / SCALE - cameraX;
+        const y = height / 2 - this.y / SCALE - cameraY;
 
         // Draw Trail
         if (this.trail.length > 1) {
@@ -32,8 +32,8 @@ class Body {
             for (let i = 0; i < this.trail.length - 1; i++) {
                 const p1 = this.trail[i];
                 const p2 = this.trail[i + 1];
-                ctx.moveTo(width / 2 + p1.x / SCALE, height / 2 - p1.y / SCALE);
-                ctx.lineTo(width / 2 + p2.x / SCALE, height / 2 - p2.y / SCALE);
+                ctx.moveTo(width / 2 + p1.x / SCALE - cameraX, height / 2 - p1.y / SCALE - cameraY);
+                ctx.lineTo(width / 2 + p2.x / SCALE - cameraX, height / 2 - p2.y / SCALE - cameraY);
             }
             ctx.stroke();
             ctx.globalAlpha = 1.0;
@@ -84,10 +84,21 @@ class GravitySimulation {
         this.currentX = 0;
         this.currentY = 0;
 
+        // Camera State
+        this.cameraX = 0;
+        this.cameraY = 0;
+        this.keys = {
+            ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+            w: false, a: false, s: false, d: false,
+            W: false, A: false, S: false, D: false
+        };
+
         this.resizeCanvas = this.resizeCanvas.bind(this);
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
         this.loop = this.loop.bind(this);
 
         this.init();
@@ -95,6 +106,8 @@ class GravitySimulation {
 
     init() {
         window.addEventListener('resize', this.resizeCanvas);
+        window.addEventListener('keydown', this.handleKeyDown);
+        window.addEventListener('keyup', this.handleKeyUp);
         this.resizeCanvas();
 
         this.canvas.addEventListener('mousedown', this.handleMouseDown);
@@ -133,6 +146,18 @@ class GravitySimulation {
         }
     }
 
+    handleKeyDown(e) {
+        if (this.keys.hasOwnProperty(e.key)) {
+            this.keys[e.key] = true;
+        }
+    }
+
+    handleKeyUp(e) {
+        if (this.keys.hasOwnProperty(e.key)) {
+            this.keys[e.key] = false;
+        }
+    }
+
     handleMouseDown(e) {
         const rect = this.canvas.getBoundingClientRect();
         this.isDragging = true;
@@ -157,8 +182,8 @@ class GravitySimulation {
             const endX = e.clientX - rect.left;
             const endY = e.clientY - rect.top;
 
-            const startXSim = (this.startX - this.canvas.width / 2) * SCALE;
-            const startYSim = -(this.startY - this.canvas.height / 2) * SCALE;
+            const startXSim = (this.startX - this.canvas.width / 2 + this.cameraX) * SCALE;
+            const startYSim = -(this.startY - this.canvas.height / 2 + this.cameraY) * SCALE;
 
             // Velocity scaling: 1 pixel drag = 1000 m/s
             const velX = -(endX - this.startX) * 1000;
@@ -241,6 +266,13 @@ class GravitySimulation {
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // Update Camera
+        const speed = 10;
+        if (this.keys.ArrowUp || this.keys.w || this.keys.W) this.cameraY -= speed;
+        if (this.keys.ArrowDown || this.keys.s || this.keys.S) this.cameraY += speed;
+        if (this.keys.ArrowLeft || this.keys.a || this.keys.A) this.cameraX -= speed;
+        if (this.keys.ArrowRight || this.keys.d || this.keys.D) this.cameraX += speed;
+
         // Physics Sub-stepping
         const subSteps = 8; // More stable simulation
         const dt = TIMESTEP / subSteps;
@@ -287,7 +319,7 @@ class GravitySimulation {
 
         // Draw
         for (const body of this.bodies) {
-            body.draw(this.ctx, this.canvas.width, this.canvas.height);
+            body.draw(this.ctx, this.canvas.width, this.canvas.height, this.cameraX, this.cameraY);
         }
 
         // Draw Drag Line
