@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="chat.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords"
+        content="Rayk Kretzschmar, Data Science, Computational Science, Portfolio, AI, Machine Learning, Web Development, Jena">
+    <meta name="author" content="Rayk Kretzschmar">
+    <link rel="canonical" href="https://raykkretzschmar.vercel.app/">
     <link rel="icon" type="image/png" href="images/favicon.png">
 
     <!-- Open Graph / Facebook -->
@@ -26,6 +30,27 @@
         content="Portfolio of Rayk Kretzschmar - Computational and Data Science Master’s Student">
     <meta property="twitter:image" content="https://raykkretzschmar.vercel.app/images/preview.png">
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rayk Kretzschmar",
+      "url": "https://raykkretzschmar.vercel.app/",
+      "image": "https://raykkretzschmar.vercel.app/images/profile.png",
+      "sameAs": [
+        "https://linkedin.com/in/rayk-kretzschmar/",
+        "https://github.com/RaykKretzschmar"
+      ],
+      "jobTitle": "Master's Student in Computational and Data Science",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Friedrich Schiller University Jena"
+      },
+      "description": "A passionate Computational and Data Science Master’s student with experience in AI, digitalization, and interdisciplinary projects."
+    }
+    </script>
+
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
@@ -34,25 +59,33 @@
     <div class="overlay-backdrop" id="overlay-backdrop"></div>
     <nav>
         <div class="logo"><strong>Rayk</strong> Kretzschmar</div>
-        <div class="burger" onclick="toggleMenu()">
+        <div class="burger" id="burger-menu">
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
         </div>
         <ul id="nav-links" class="nav-links">
-            <li><a href="#home" onclick="closeMenu()">Home</a></li>
-            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
-            <li><a href="#impressum" onclick="closeMenu()">Impressum</a></li>
+            <li><a href="#home" class="nav-link-item">Home</a></li>
+            <li><a href="#projects" class="nav-link-item">Projects</a></li>
+            <li><a href="#impressum" class="nav-link-item">Impressum</a></li>
             <!-- Social Media Links -->
             <li class="social-media">
                 <ul class="navbar-nav">
                     <li class="nav-item compact">
-                        <a class="nav-link" href="https://linkedin.com/in/rayk-kretzschmar/" target="_blank">
+                        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                            <i class="bi bi-sun-fill"></i>
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item compact">
+                        <a class="nav-link" href="https://linkedin.com/in/rayk-kretzschmar/" target="_blank"
+                            aria-label="LinkedIn">
                             <i class="bi bi-linkedin" role="img"></i>
                         </a>
                     </li>
                     <li class="nav-item compact">
-                        <a class="nav-link" href="https://github.com/RaykKretzschmar" target="_blank">
+                        <a class="nav-link" href="https://github.com/RaykKretzschmar" target="_blank"
+                            aria-label="GitHub">
                             <i class="bi bi-github" role="img"></i>
                         </a>
                     </li>
@@ -310,11 +343,11 @@
                     <h3>Gravity Simulation</h3>
                     <p>Interactive N-body gravity simulation running in your browser. Create planets and watch them
                         interact!</p>
-                    <button class="play-btn" onclick="openGravitySimulation(event)">Play Now</button>
+                    <button class="play-btn" id="play-gravity-btn">Play Now</button>
                     <span class="hashtags">#JavaScript #Canvas #Physics</span>
                 </div>
                 <div class="simulation-container" id="gravity-sim-container" style="display: none;">
-                    <button class="close-sim-btn" onclick="closeGravitySimulation(event)">
+                    <button class="close-sim-btn" id="close-gravity-btn">
                         <i class="bi bi-x-lg"></i> Close
                     </button>
                     <div class="sim-controls">
@@ -392,13 +425,13 @@
 
     <!-- Chat Widget -->
     <div class="chat-widget">
-        <button class="chat-toggle-btn" onclick="toggleChat()">
+        <button class="chat-toggle-btn" id="chat-toggle-btn" aria-label="Open Chat">
             <i class="bi bi-chat-dots-fill"></i>
         </button>
         <div class="chat-window" id="chat-window">
             <div class="chat-header">
                 <h3><i class="bi bi-robot"></i> Rayk's AI Clone</h3>
-                <button class="chat-close-btn" onclick="toggleChat()">
+                <button class="chat-close-btn" id="chat-close-btn" aria-label="Close Chat">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -411,8 +444,8 @@
                 </div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Ask me something..." onkeypress="handleKeyPress(event)">
-                <button class="chat-send-btn" onclick="sendMessage()">
+                <input type="text" id="chat-input" placeholder="Ask me something...">
+                <button class="chat-send-btn" id="chat-send-btn" aria-label="Send Message">
                     <i class="bi bi-send-fill"></i>
                 </button>
             </div>

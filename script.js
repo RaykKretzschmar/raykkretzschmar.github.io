@@ -11,6 +11,31 @@ function closeMenu() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved user preference, if any, on load of the website
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+        body.classList.add(currentTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // If no preference, check system preference
+        body.classList.add('dark-mode');
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+
+            let theme = 'light';
+            if (body.classList.contains('dark-mode')) {
+                theme = 'dark-mode';
+            }
+            localStorage.setItem('theme', theme);
+        });
+    }
+
     const textElement = document.getElementById('welcome-text');
     const text = textElement.textContent;
     textElement.textContent = ''; // Clear text initially
@@ -57,7 +82,77 @@ document.addEventListener('DOMContentLoaded', () => {
     timelineItems.forEach(item => {
         observer.observe(item);
     });
+
+    // --- Event Listeners for Interactive Elements ---
+
+    // Burger Menu
+    const burger = document.getElementById('burger-menu');
+    if (burger) {
+        burger.addEventListener('click', toggleMenu);
+    }
+
+    // Nav Links (Close menu on click)
+    const navLinkItems = document.querySelectorAll('.nav-link-item');
+    navLinkItems.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Gravity Simulation
+    const playGravityBtn = document.getElementById('play-gravity-btn');
+    if (playGravityBtn) {
+        playGravityBtn.addEventListener('click', openGravitySimulation);
+    }
+
+    const closeGravityBtn = document.getElementById('close-gravity-btn');
+    if (closeGravityBtn) {
+        closeGravityBtn.addEventListener('click', closeGravitySimulation);
+    }
+
+    // Chat Widget
+    const chatToggleBtn = document.getElementById('chat-toggle-btn');
+    if (chatToggleBtn) {
+        chatToggleBtn.addEventListener('click', toggleChat);
+    }
+
+    const chatCloseBtn = document.getElementById('chat-close-btn');
+    if (chatCloseBtn) {
+        chatCloseBtn.addEventListener('click', toggleChat);
+    }
+
+    const chatSendBtn = document.getElementById('chat-send-btn');
+    if (chatSendBtn) {
+        chatSendBtn.addEventListener('click', sendMessage);
+    }
+
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+        chatInput.addEventListener('keypress', handleKeyPress);
+    }
+
+    // Overlay Backdrop
+    const overlayBackdrop = document.getElementById('overlay-backdrop');
+    if (overlayBackdrop) {
+        overlayBackdrop.addEventListener('click', (e) => {
+            const card = document.getElementById('gravity-project-card');
+            if (card && card.classList.contains('expanded')) {
+                closeGravitySimulation(e);
+            }
+        });
+    }
 });
+
+/* Menu Logic */
+function toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('nav-active');
+}
+
+function closeMenu() {
+    const navLinks = document.getElementById('nav-links');
+    if (navLinks.classList.contains('nav-active')) {
+        navLinks.classList.remove('nav-active');
+    }
+}
 
 /* Chat Widget Logic */
 function toggleChat() {
@@ -224,11 +319,3 @@ function closeGravitySimulation(event) {
         gravitySimInstance.stop();
     }
 }
-
-// Close simulation when clicking on overlay
-document.getElementById('overlay-backdrop').addEventListener('click', (e) => {
-    const card = document.getElementById('gravity-project-card');
-    if (card.classList.contains('expanded')) {
-        closeGravitySimulation(e);
-    }
-});
