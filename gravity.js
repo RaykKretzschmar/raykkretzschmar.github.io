@@ -67,31 +67,6 @@ class Body {
         const scaledRadius2 = other.radius * SCALE;
         return distance <= scaledRadius1 + scaledRadius2;
     }
-
-    bounceOff(other) {
-        const dx = other.x - this.x;
-        const dy = other.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance === 0) return;
-
-        const nx = dx / distance;
-        const ny = dy / distance;
-
-        const dvx = other.vx - this.vx;
-        const dvy = other.vy - this.vy;
-
-        const impactSpeed = dvx * nx + dvy * ny;
-
-        if (impactSpeed > 0) return;
-
-        const impulse = (2 * impactSpeed) / (this.mass + other.mass);
-
-        this.vx -= impulse * other.mass * nx;
-        this.vy -= impulse * other.mass * ny;
-        other.vx += impulse * this.mass * nx;
-        other.vy += impulse * this.mass * ny;
-    }
 }
 
 class GravitySimulation {
@@ -212,68 +187,51 @@ class GravitySimulation {
         return { fx, fy };
     }
 
-    splitBody(body) {
-        const numFragments = Math.floor(Math.random() * 2) + 2; // 2 or 3
-        const fragments = [];
-
-        for (let i = 0; i < numFragments; i++) {
-            const newMass = body.mass / numFragments;
-            const newRadius = Math.max(MIN_RADIUS, Math.floor(body.radius / numFragments));
-
-            const newVx = body.vx + (Math.random() * 2000 - 1000);
-            const newVy = body.vy + (Math.random() * 2000 - 1000);
-
-            fragments.push(new Body(
-                body.x, body.y, newVx, newVy, newMass, newRadius, body.color
-            ));
-        }
-        return fragments;
-    }
-
     handleCollisions(bodies) {
-        let newBodies = [];
+        const mergedBodies = new Set();
+        const nextBodies = [];
 
         for (let i = 0; i < bodies.length; i++) {
-            for (let j = 0; j < bodies.length; j++) {
-                if (i !== j && !bodies[i].dead && !bodies[j].dead) {
-                    if (bodies[i].collidesWith(bodies[j])) {
-                        const b1 = bodies[i];
-                        const b2 = bodies[j];
+            if (mergedBodies.has(i)) continue;
 
-                        if (b1.radius <= MIN_RADIUS && b2.radius <= MIN_RADIUS) {
-                            b1.bounceOff(b2);
-                        } else {
-                            // Push apart
-                            const dist = b1.distanceTo(b2);
-                            const overlap = (b1.radius * SCALE + b2.radius * SCALE) - dist;
+            let b1 = bodies[i];
+            let merged = false;
 
-                            if (overlap > 0) {
-                                const pushDist = overlap / 2;
-                                const dx = (b1.x - b2.x) / dist;
-                                const dy = (b1.y - b2.y) / dist;
+            for (let j = i + 1; j < bodies.length; j++) {
+                if (mergedBodies.has(j)) continue;
 
-                                b1.x += pushDist * dx;
-                                b1.y += pushDist * dy;
-                                b2.x -= pushDist * dx;
-                                b2.y -= pushDist * dy;
-                            }
+                let b2 = bodies[j];
 
-                            b1.dead = true;
-                            b2.dead = true;
+                if (b1.collidesWith(b2)) {
+                    // Merge b2 into b1 (conceptually creating a new body)
+                    const newMass = b1.mass + b2.mass;
 
-                            if (b1.radius > MIN_RADIUS && b1.mass > MIN_MASS) {
-                                newBodies.push(...this.splitBody(b1));
-                            }
-                            if (b2.radius > MIN_RADIUS && b2.mass > MIN_MASS) {
-                                newBodies.push(...this.splitBody(b2));
-                            }
-                        }
-                    }
+                    // Conservation of Momentum: (m1v1 + m2v2) / (m1 + m2)
+                    const newVx = (b1.mass * b1.vx + b2.mass * b2.vx) / newMass;
+                    const newVy = (b1.mass * b1.vy + b2.mass * b2.vy) / newMass;
+
+                    // Position: Center of Mass
+                    const newX = (b1.mass * b1.x + b2.mass * b2.x) / newMass;
+                    const newY = (b1.mass * b1.y + b2.mass * b2.y) / newMass;
+
+                    // Radius: Volume conservation (assuming sphere) or Area (circle)
+                    // Let's use Area conservation for 2D visual: r_new = sqrt(r1^2 + r2^2)
+                    const newRadius = Math.sqrt(b1.radius * b1.radius + b2.radius * b2.radius);
+
+                    // Color: Blend or keep larger body's color
+                    const color = b1.mass > b2.mass ? b1.color : b2.color;
+
+                    // Create new merged body
+                    b1 = new Body(newX, newY, newVx, newVy, newMass, newRadius, color);
+
+                    mergedBodies.add(j); // Mark b2 as merged
+                    merged = true;
                 }
             }
+            nextBodies.push(b1);
         }
 
-        return bodies.filter(b => !b.dead).concat(newBodies);
+        return nextBodies;
     }
 
     loop() {
