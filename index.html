@@ -30,6 +30,7 @@
 </head>
 
 <body>
+    <div class="overlay-backdrop" id="overlay-backdrop"></div>
     <nav>
         <div class="logo"><strong>Rayk</strong> Kretzschmar</div>
         <div class="burger" onclick="toggleMenu()">
@@ -303,13 +304,23 @@
             </div>
 
             <!-- Gravity Simulation -->
-            <div class="project-card">
-                <a href="gravity.html">
+            <div class="project-card" id="gravity-project-card">
+                <div class="card-content">
                     <h3>Gravity Simulation</h3>
-                </a>
-                <p>Interactive N-body gravity simulation running in your browser. Create planets and watch them
-                    interact!</p>
-                <span class="hashtags">#JavaScript #Canvas #Physics</span>
+                    <p>Interactive N-body gravity simulation running in your browser. Create planets and watch them
+                        interact!</p>
+                    <button class="play-btn" onclick="openGravitySimulation(event)">Play Now</button>
+                    <span class="hashtags">#JavaScript #Canvas #Physics</span>
+                </div>
+                <div class="simulation-container" id="gravity-sim-container" style="display: none;">
+                    <button class="close-sim-btn" onclick="closeGravitySimulation(event)">
+                        <i class="bi bi-x-lg"></i> Close
+                    </button>
+                    <div class="sim-controls">
+                        <p>Drag and release to launch planets. Collisions may split bodies.</p>
+                    </div>
+                    <canvas id="inlineSimCanvas"></canvas>
+                </div>
             </div>
 
             <!-- Project Confluence -->
@@ -406,6 +417,7 @@
         </div>
     </div>
 
+    <script src="gravity.js"></script>
     <script src="script.js"></script>
 </body>
 

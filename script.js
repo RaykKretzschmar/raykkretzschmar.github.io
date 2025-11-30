@@ -169,8 +169,66 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('An error occurred while sending the message.');
             } finally {
                 submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
             }
         });
+    }
+});
+
+/* Gravity Simulation Inline Handling */
+let gravitySimInstance = null;
+
+function openGravitySimulation(event) {
+    // Stop propagation to prevent any parent handlers (though we removed onclick from card, it's good practice)
+    event.stopPropagation();
+
+    const card = document.getElementById('gravity-project-card');
+    const container = document.getElementById('gravity-sim-container');
+    const overlay = document.getElementById('overlay-backdrop');
+
+    if (!card.classList.contains('expanded')) {
+        card.classList.add('expanded');
+        container.style.display = 'block';
+        overlay.classList.add('active');
+
+        // Initialize simulation if not already done
+        if (!gravitySimInstance) {
+            // Ensure gravity.js is loaded. It is included in index.html but we need to make sure the class is available.
+            // Since it's a script tag at the end of body, it should be fine.
+            if (typeof GravitySimulation !== 'undefined') {
+                gravitySimInstance = new GravitySimulation('inlineSimCanvas');
+            } else {
+                console.error("GravitySimulation class not found");
+                return;
+            }
+        }
+
+        // Use requestAnimationFrame to ensure the display:block has triggered a layout update
+        requestAnimationFrame(() => {
+            gravitySimInstance.start();
+        });
+    }
+}
+
+function closeGravitySimulation(event) {
+    event.stopPropagation(); // Prevent bubbling to the card click handler
+
+    const card = document.getElementById('gravity-project-card');
+    const container = document.getElementById('gravity-sim-container');
+    const overlay = document.getElementById('overlay-backdrop');
+
+    card.classList.remove('expanded');
+    container.style.display = 'none';
+    overlay.classList.remove('active');
+
+    if (gravitySimInstance) {
+        gravitySimInstance.stop();
+    }
+}
+
+// Close simulation when clicking on overlay
+document.getElementById('overlay-backdrop').addEventListener('click', (e) => {
+    const card = document.getElementById('gravity-project-card');
+    if (card.classList.contains('expanded')) {
+        closeGravitySimulation(e);
     }
 });
