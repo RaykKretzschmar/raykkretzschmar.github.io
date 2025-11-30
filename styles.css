@@ -789,3 +789,18 @@ details[open] summary {
 .project-card.expanded .card-content .play-btn {
     display: none;
 }
+
+/* Project Card Image */
+.project-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.02);
+}
