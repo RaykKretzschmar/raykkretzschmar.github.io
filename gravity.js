@@ -4,6 +4,8 @@ const SCALE = 1e9; // 1e9 meters per pixel (approx)
 const TIMESTEP = 86400; // 1 day in seconds
 const MIN_RADIUS = 3;
 const MIN_MASS = 1e20;
+const MAX_BODIES = 100; // Limit to prevent performance issues
+const MIN_FRAGMENT_MASS = 1e26; // Only bodies above this mass can produce fragments
 
 class Body {
     constructor(x, y, vx, vy, mass, radius, color) {
@@ -215,12 +217,13 @@ class GravitySimulation {
     handleCollisions(bodies) {
         const mergedBodies = new Set();
         const nextBodies = [];
+        let fragmentsSpawned = 0;
+        const maxNewFragments = Math.max(0, MAX_BODIES - bodies.length);
 
         for (let i = 0; i < bodies.length; i++) {
             if (mergedBodies.has(i)) continue;
 
             let b1 = bodies[i];
-            let merged = false;
 
             for (let j = i + 1; j < bodies.length; j++) {
                 if (mergedBodies.has(j)) continue;
@@ -228,29 +231,76 @@ class GravitySimulation {
                 let b2 = bodies[j];
 
                 if (b1.collidesWith(b2)) {
-                    // Merge b2 into b1 (conceptually creating a new body)
-                    const newMass = b1.mass + b2.mass;
+                    // Collision Physics
+                    const totalMass = b1.mass + b2.mass;
 
-                    // Conservation of Momentum: (m1v1 + m2v2) / (m1 + m2)
-                    const newVx = (b1.mass * b1.vx + b2.mass * b2.vx) / newMass;
-                    const newVy = (b1.mass * b1.vy + b2.mass * b2.vy) / newMass;
+                    // Debris Calculation
+                    // Generate debris proportional to the smaller body
+                    const smallerMass = Math.min(b1.mass, b2.mass);
+                    const debrisMassTotal = smallerMass * 0.5; // 50% of smaller body becomes debris
+                    const newMass = totalMass - debrisMassTotal;
 
-                    // Position: Center of Mass
-                    const newX = (b1.mass * b1.x + b2.mass * b2.x) / newMass;
-                    const newY = (b1.mass * b1.y + b2.mass * b2.y) / newMass;
+                    // Center of Mass Velocity (Conservation of Momentum)
+                    const newVx = (b1.mass * b1.vx + b2.mass * b2.vx) / totalMass;
+                    const newVy = (b1.mass * b1.vy + b2.mass * b2.vy) / totalMass;
 
-                    // Radius: Volume conservation (assuming sphere) or Area (circle)
-                    // Let's use Area conservation for 2D visual: r_new = sqrt(r1^2 + r2^2)
-                    const newRadius = Math.sqrt(b1.radius * b1.radius + b2.radius * b2.radius);
+                    // Center of Mass Position
+                    const newX = (b1.mass * b1.x + b2.mass * b2.x) / totalMass;
+                    const newY = (b1.mass * b1.y + b2.mass * b2.y) / totalMass;
 
-                    // Color: Blend or keep larger body's color
+                    // New Radius (Area conservation approximation)
+                    // Visual radius is in pixels. Physical radius = radius * SCALE
+                    // Area ~ radius^2
+                    const r1 = b1.radius;
+                    const r2 = b2.radius;
+                    // Area proportional to mass for visual consistency
+                    const totalArea = Math.PI * (r1 * r1 + r2 * r2);
+                    const newArea = totalArea * (newMass / totalMass);
+                    const newRadius = Math.sqrt(newArea / Math.PI);
+
+                    // Color: Inherit from largest
                     const color = b1.mass > b2.mass ? b1.color : b2.color;
 
-                    // Create new merged body
+                    // Create Merged Body
+                    // We update b1 to be the new merged body so it can collide with others in this frame potentially
+                    // (though physics-wise simpler to just let it be for this frame)
                     b1 = new Body(newX, newY, newVx, newVy, newMass, newRadius, color);
 
-                    mergedBodies.add(j); // Mark b2 as merged
-                    merged = true;
+                    // Spawn Fragments (only if both bodies are massive enough and we have room)
+                    const canFragment = smallerMass >= MIN_FRAGMENT_MASS && fragmentsSpawned < maxNewFragments;
+
+                    if (canFragment) {
+                        const fragmentCount = Math.min(
+                            Math.floor(Math.random() * 3) + 2, // 2 to 4 fragments
+                            maxNewFragments - fragmentsSpawned
+                        );
+                        const massPerFragment = debrisMassTotal / fragmentCount;
+                        const areaPerFragment = (totalArea - newArea) / fragmentCount;
+                        const fragmentRadius = Math.max(2, Math.sqrt(areaPerFragment / Math.PI));
+
+                        for (let k = 0; k < fragmentCount; k++) {
+                            const angle = Math.random() * Math.PI * 2;
+
+                            // Ejection velocity: needs to be high enough to be visible and not immediately re-merge
+                            const ejectionSpeed = (Math.random() * 2e5) + 1e5; // 100km/s - 300km/s
+
+                            const fragVx = newVx + Math.cos(angle) * ejectionSpeed;
+                            const fragVy = newVy + Math.sin(angle) * ejectionSpeed;
+
+                            // Position: Spawn at the edge of the new body + fragment radius + buffer
+                            const spawnDistance = (newRadius + fragmentRadius) * SCALE * 1.5;
+                            const fragX = newX + Math.cos(angle) * spawnDistance;
+                            const fragY = newY + Math.sin(angle) * spawnDistance;
+
+                            // Fragments use the smaller body's color
+                            const fragColor = b1.mass > b2.mass ? b2.color : b1.color;
+
+                            nextBodies.push(new Body(fragX, fragY, fragVx, fragVy, massPerFragment, fragmentRadius, fragColor));
+                            fragmentsSpawned++;
+                        }
+                    }
+
+                    mergedBodies.add(j);
                 }
             }
             nextBodies.push(b1);
