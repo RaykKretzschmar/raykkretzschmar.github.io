@@ -2,7 +2,7 @@
 
 This is my personal portfolio website, designed to showcase my projects, skills, and experience. It features a digital clone chatbot that allows visitors to interact with a virtual version of me.
 
-You can visit the live site here: [raykkretzschmar.vercel.app](https://raykkretzschmar.vercel.app)
+You can visit the live site here: [www.rayk.dev](https://www.rayk.dev)
 
 ## How I Built It
 
