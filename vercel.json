@@ -1,4 +1,17 @@
 {
+    "redirects": [
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "raykkretzschmar.vercel.app"
+                }
+            ],
+            "destination": "https://www.rayk.dev/$1",
+            "permanent": true
+        }
+    ],
     "rewrites": [
         {
             "source": "/api/(.*)",
