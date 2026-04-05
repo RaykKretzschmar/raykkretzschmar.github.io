@@ -72,12 +72,16 @@ class Body {
 }
 
 class GravitySimulation {
-    constructor(canvasId) {
+    constructor(canvasId, options = {}) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
+        this.container = options.containerId ? document.getElementById(options.containerId) : this.canvas.parentElement;
         this.bodies = [];
         this.isRunning = false;
         this.animationFrameId = null;
+        this.viewportWidth = window.innerWidth;
+        this.viewportHeight = window.innerHeight;
+        this.pixelRatio = 1;
 
         // Interaction State
         this.isDragging = false;
@@ -128,8 +132,19 @@ class GravitySimulation {
 
     resizeCanvas() {
         if (this.canvas) {
-            this.canvas.width = this.canvas.parentElement.clientWidth;
-            this.canvas.height = this.canvas.parentElement.clientHeight;
+            const bounds = this.container ? this.container.getBoundingClientRect() : this.canvas.getBoundingClientRect();
+            this.viewportWidth = Math.max(1, Math.floor(bounds.width || window.innerWidth));
+            this.viewportHeight = Math.max(1, Math.floor(bounds.height || window.innerHeight));
+            this.pixelRatio = window.devicePixelRatio || 1;
+
+            this.canvas.style.width = `${this.viewportWidth}px`;
+            this.canvas.style.height = `${this.viewportHeight}px`;
+            this.canvas.width = Math.floor(this.viewportWidth * this.pixelRatio);
+            this.canvas.height = Math.floor(this.viewportHeight * this.pixelRatio);
+
+            // Reset transform before applying DPI scaling to avoid compounding scales on resize.
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+            this.ctx.scale(this.pixelRatio, this.pixelRatio);
         }
     }
 
@@ -184,8 +199,8 @@ class GravitySimulation {
             const endX = e.clientX - rect.left;
             const endY = e.clientY - rect.top;
 
-            const startXSim = (this.startX - this.canvas.width / 2 + this.cameraX) * SCALE;
-            const startYSim = -(this.startY - this.canvas.height / 2 + this.cameraY) * SCALE;
+            const startXSim = (this.startX - this.viewportWidth / 2 + this.cameraX) * SCALE;
+            const startYSim = -(this.startY - this.viewportHeight / 2 + this.cameraY) * SCALE;
 
             // Velocity scaling: 1 pixel drag = 1000 m/s
             const velX = -(endX - this.startX) * 1000;
@@ -314,7 +329,7 @@ class GravitySimulation {
 
         // Clear
         this.ctx.fillStyle = 'black';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.viewportWidth, this.viewportHeight);
 
         // Update Camera
         const speed = 10;
@@ -369,7 +384,7 @@ class GravitySimulation {
 
         // Draw
         for (const body of this.bodies) {
-            body.draw(this.ctx, this.canvas.width, this.canvas.height, this.cameraX, this.cameraY);
+            body.draw(this.ctx, this.viewportWidth, this.viewportHeight, this.cameraX, this.cameraY);
         }
 
         // Draw Drag Line

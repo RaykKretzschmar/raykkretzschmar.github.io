@@ -9,10 +9,12 @@
     <meta name="robots" content="noindex">
     <title>Interactive Gravity Simulation by Rayk Kretzschmar</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles.css">
     <style>
+        html,
         body {
             margin: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             background-color: #000;
             color: #fff;
@@ -21,25 +23,44 @@
 
         canvas {
             display: block;
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
         }
 
         #ui {
             position: absolute;
             top: 20px;
             left: 20px;
+            max-width: min(420px, calc(100vw - 40px));
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(18, 24, 36, 0.82), rgba(8, 12, 20, 0.68));
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
             pointer-events: none;
         }
 
         h1 {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
+        #ui p {
+            margin: 8px 0 0;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            opacity: 0.92;
+        }
+
+        #ui .controls {
+            margin-top: 10px;
+            font-size: 0.85rem;
             opacity: 0.8;
+            letter-spacing: 0.01em;
         }
 
         .back-link {
@@ -59,13 +80,32 @@
         .back-link:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
+        @media (max-width: 700px) {
+            #ui {
+                top: 12px;
+                left: 12px;
+                max-width: calc(100vw - 24px);
+                padding: 12px 13px;
+            }
+
+            .back-link {
+                top: 12px;
+                right: 12px;
+                padding: 7px 12px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div id="ui">
         <h1>Gravity Simulator</h1>
-        <p>Drag and release to launch objects. Collisions create debris.</p>
+        <p>Build a dynamic orbital system by launching new bodies and watching them bend trajectories through mutual
+            gravity.</p>
+        <p class="controls">Controls: click and drag to set launch velocity. Use arrow keys or WASD to move the camera.
+        </p>
     </div>
     <a href="index.html" class="back-link">← Back to Home</a>
     <canvas id="simCanvas"></canvas>

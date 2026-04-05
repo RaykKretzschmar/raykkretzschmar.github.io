@@ -3,39 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rayk Kretzschmar| Personal Website | Computational & Data Science Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="chat.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayk Kretzschmar | Computational Metabolomics and Bioinformatics Research</title>
     <meta name="keywords"
-        content="Rayk Kretzschmar, Data Science, Computational Science, Portfolio, AI, Machine Learning, Web Development, Jena">
+        content="Rayk Kretzschmar, computational metabolomics, bioinformatics, machine learning, Friedrich Schiller University Jena">
     <meta name="author" content="Rayk Kretzschmar">
     <meta name="description"
-        content="Explore the portfolio of Rayk Kretzschmar, a Computational & Data Science professional specializing in AI, Machine Learning and Metabolomics in Jena.">
+        content="Academic profile of Rayk Kretzschmar, PhD candidate researcher in computational metabolomics and bioinformatics at Friedrich Schiller University Jena, Böckerlab.">
     <link rel="canonical" href="https://www.rayk.dev/">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.rayk.dev/">
-    <meta property="og:title" content="Rayk Kretzschmar - Portfolio">
+    <meta property="og:title" content="Rayk Kretzschmar | Computational Metabolomics Research">
     <meta property="og:description"
-        content="Portfolio of Rayk Kretzschmar - Computational and Data Science Master’s Student">
+        content="PhD candidate researcher building computational methods and reproducible software for prediction of metabolite bioactivity.">
     <meta property="og:image" content="https://www.rayk.dev/images/preview.png">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.rayk.dev/">
-    <meta property="twitter:title" content="Rayk Kretzschmar - Portfolio">
+    <meta property="twitter:title" content="Rayk Kretzschmar | Computational Metabolomics Research">
     <meta property="twitter:description"
-        content="Portfolio of Rayk Kretzschmar - Computational and Data Science Master’s Student">
+        content="PhD candidate researcher in bioinformatics and metabolomics at Friedrich Schiller University Jena.">
     <meta property="twitter:image" content="https://www.rayk.dev/images/preview.png">
 
     <!-- Google Search Console -->
     <meta name="google-site-verification" content="7mMphAQR19qQkQn_SfYcEp-MHD62ODDktrXdJQmPato" />
 
-    <!-- JSON-LD Structured Data -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,14 +43,16 @@
       "image": "https://www.rayk.dev/images/profile.png",
       "sameAs": [
         "https://linkedin.com/in/rayk-kretzschmar/",
-        "https://github.com/RaykKretzschmar"
+        "https://github.com/RaykKretzschmar",
+                "https://orcid.org/0009-0007-2326-5457",
+                "https://scholar.google.com/citations?user=yuetOyvrR_wC"
       ],
-      "jobTitle": "Master's Student in Computational and Data Science",
-      "worksFor": {
+      "jobTitle": "Scientific Researcher",
+      "affiliation": {
         "@type": "Organization",
         "name": "Friedrich Schiller University Jena"
       },
-      "description": "A passionate Computational and Data Science Master’s student with experience in AI, digitalization, and interdisciplinary projects."
+      "description": "PhD candidate in computational metabolomics and bioinformatics in the Böckerlab, supported by the ERC Advanced Grant BindingShadows."
     }
     </script>
 
@@ -61,399 +61,346 @@
 </head>
 
 <body>
-    <div class="overlay-backdrop" id="overlay-backdrop"></div>
-    <nav>
-        <div class="logo"><strong>Rayk</strong> Kretzschmar</div>
-        <div class="burger" id="burger-menu">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-        <ul id="nav-links" class="nav-links">
-            <li><a href="#home" class="nav-link-item">Home</a></li>
-            <li><a href="#projects" class="nav-link-item">Projects</a></li>
-            <li><a href="#contact" class="nav-link-item">Contact</a></li>
-            <!-- Social Media Links -->
-            <li class="social-media">
-                <ul class="navbar-nav">
-                    <li class="nav-item compact">
-                        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                            <i class="bi bi-sun-fill"></i>
-                            <i class="bi bi-moon-fill"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item compact">
-                        <a class="nav-link" href="https://linkedin.com/in/rayk-kretzschmar/" target="_blank"
-                            aria-label="LinkedIn">
-                            <i class="bi bi-linkedin" role="img"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item compact">
-                        <a class="nav-link" href="https://github.com/RaykKretzschmar" target="_blank"
-                            aria-label="GitHub">
-                            <i class="bi bi-github" role="img"></i>
-                        </a>
-                    </li>
+    <header class="site-header">
+        <nav class="main-nav">
+            <a href="#home" class="logo" aria-label="Go to top">Rayk Kretzschmar</a>
+
+            <button class="burger" id="burger-menu" aria-label="Open menu" aria-expanded="false"
+                aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul id="nav-links" class="nav-links">
+                <li><a href="#home" class="nav-link-item">Home</a></li>
+                <li><a href="#publications" class="nav-link-item">Publications</a></li>
+                <li><a href="#software-data" class="nav-link-item">Software and Data</a></li>
+                <li><a href="#cv" class="nav-link-item">CV</a></li>
+                <li><a href="#talks-teaching" class="nav-link-item">Talks and Teaching</a></li>
+                <li><a href="#contact" class="nav-link-item">Contact</a></li>
+                <li class="social-links">
+                    <a href="https://orcid.org/0009-0007-2326-5457" target="_blank" rel="noopener noreferrer"
+                        aria-label="ORCID">
+                        <i class="bi bi-mortarboard-fill" role="img"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=yuetOyvrR_wC" target="_blank"
+                        rel="noopener noreferrer" aria-label="Google Scholar">
+                        <i class="bi bi-google" role="img"></i>
+                    </a>
+                    <a href="https://github.com/RaykKretzschmar" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub">
+                        <i class="bi bi-github" role="img"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/rayk-kretzschmar/" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+                        <i class="bi bi-linkedin" role="img"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-profile">
+                <img src="images/profile.png" alt="Portrait of Rayk Kretzschmar" class="profile-image">
+            </div>
+            <div class="hero-content">
+                <p class="eyebrow">Rayk Kretzschmar</p>
+                <h1>PhD Candidate at Friedrich Schiller University Jena</h1>
+                <p class="mission">
+                    I develop computational methods to predict metabolite structures and functions from mass
+                    spectrometry data.
+                </p>
+            </div>
+            <aside class="hero-now" aria-label="Current focus">
+                <h2>Now</h2>
+                <ul>
+                    <li>Discovering hidden uses for unknown chemicals</li>
+                    <li>Building an AI translator for chemistry</li>
+                    <li>Accelerating the discovery of new drug compounds</li>
                 </ul>
-            </li>
-        </ul>
-    </nav>
-
-    <section id="home">
-        <div class="hero">
-            <img src="images/profile.png" alt="Rayk Kretzschmar" class="profile-img">
-            <h1 id="welcome-text">Welcome! I'm Rayk Kretzschmar</h1>
-            <p>A passionate Computational and Data Science Master’s student with experience in AI, digitalization, and
-                interdisciplinary projects that bridge data science with real-world applications.</p>
-            <div class="cta-container">
-                <a href="#projects" class="cta-button">Explore My Work</a>
-                <div class="resume-buttons">
-                    <a href="ressources/Resume_Rayk_Kretzschmar.pdf" target="_blank" class="resume-btn"
-                        title="Download English Resume">
-                        <i class="bi bi-file-earmark-person"></i> Resume (EN)
-                    </a>
-                    <a href="ressources/Lebenslauf_Rayk_Kretzschmar.pdf" target="_blank" class="resume-btn"
-                        title="Download German Lebenslauf">
-                        <i class="bi bi-file-earmark-person"></i> Lebenslauf (DE)
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="background-container">
-            <div class="timeline">
-                <!-- Current Role: Webis Group -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Scientific Assistant</h3>
-                        <span class="institution">Friedrich Schiller University Jena, Webis Group</span>
-                        <span class="date">2025 – Present</span>
-                        <ul>
-                            <li>Developed and integrated new information retrieval models into the open-source <a
-                                    href="https://lightning-ir.webis.de/index.html">LightningIR</a> Python library.
-                            </li>
-                            <li>Conducted evaluations on benchmark datasets to validate model performance.</li>
-                            <li>Improved project usability by restructuring and extending comprehensive technical
-                                documentation.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Education: Master's -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Master of Science in Computational and Data Science</h3>
-                        <span class="institution">Friedrich Schiller University Jena</span>
-                        <span class="date">2026</span>
-                        <p>Specialization: NLP and Knowledge Graphs</p>
-                    </div>
-                </div>
-
-                <!-- Teaching Role -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Scientific Assistant (Teaching)</h3>
-                        <span class="institution">Friedrich Schiller University Jena</span>
-                        <span class="date">2025</span>
-                        <ul>
-                            <li>Responsible for reviewing and evaluating weekly student submissions for the course
-                                "Efficient Computing/Parallel Computing II".</li>
-                            <li>Supervised the course's "Open Lab," where students developed hands-on projects using
-                                Raspberry Pi devices.</li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <!-- Previous Role: DLR -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Student Assistant</h3>
-                        <span class="institution">German Aerospace Center (DLR) - Institute for Data Science</span>
-                        <span class="date">2024 – 2025</span>
-                        <ul>
-                            <li>Researched and developed methods in explainable AI to improve the interpretability and
-                                transparency of machine learning models.</li>
-                            <li>Explored innovative approaches bridging theoretical research and practical applications
-                                in real-world contexts.</li>
-                            <li>Contributed to cutting-edge projects ensuring accountable, effective, and understandable
-                                AI systems.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Previous Role: CONVALES -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Working Student Digitalization</h3>
-                        <span class="institution">CONVALES Services GmbH</span>
-                        <span class="date">2023</span>
-                        <ul>
-                            <li>Administered and customized the Atlassian Stack (Confluence, Jira) to align with
-                                internal requirements.</li>
-                            <li>Oversaw third-party system integrations and ensured smooth platform transitions.</li>
-                            <li>Processed and managed data through API-based workflows to support business operations.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- AI Summer School -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>AI Summer School</h3>
-                        <span class="institution">Bad Kösen</span>
-                        <span class="date">2023</span>
-                        <ul>
-                            <li>Invitational one-week intensive course on AI (Deep Learning, NLP, Computer Vision, AI
-                                Ethics).</li>
-                            <li>Participated in hands-on workshops and projects to apply knowledge to real-world
-                                problems.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Education: Bachelor's -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Bachelor of Science in Bioinformatics</h3>
-                        <span class="institution">Friedrich Schiller University Jena</span>
-                        <span class="date">2023</span>
-                    </div>
-                </div>
-
-                <!-- Previous Role: Physio logisch -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Technical Assistant</h3>
-                        <span class="institution">Physio logisch</span>
-                        <span class="date">2019 – 2022</span>
-                        <p>Provided technical support.</p>
-                    </div>
-                </div>
-
-                <!-- Education: A-levels -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Higher Education Entrance Qualification (A-levels)</h3>
-                        <span class="institution">Johann-Heinrich-Pestalozzi-Gymnasium Rodewisch</span>
-                        <span class="date">2016</span>
-                    </div>
-                </div>
-
-                <!-- Education: Preliminary Studies -->
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Preliminary Studies in Computer Science</h3>
-                        <span class="institution">University of Applied Sciences Zwickau</span>
-                        <span class="date">2013 – 2014</span>
-                        <p>Completed one year of preliminary studies while attending secondary school.</p>
-                    </div>
-                </div>
+            </aside>
+        </section>
+        <!-- 
+        <section id="research" class="section-block">
+            <div class="section-head">
+                <p class="eyebrow">Research</p>
+                <h2>Themes</h2>
+                <p>Work is organized by problem and method, with a focus on impact for computational metabolomics.</p>
             </div>
 
-            <!-- Skills Section -->
-            <div class="skills-card">
-                <h3>Skills & Languages</h3>
+            <div class="theme-grid">
+                <article class="theme-card">
+                    <h3>Probabilistic Metabolite Annotation</h3>
+                    <p><strong>Problem:</strong> Ambiguous MS/MS evidence often yields unstable candidate rankings.</p>
+                    <p><strong>Method:</strong> Bayesian and calibration-aware scoring with chemistry-informed priors.
+                    </p>
+                    <p><strong>Contribution:</strong> More reliable confidence estimates for downstream biological
+                        analysis.</p>
+                    <p><strong>Status:</strong> <span class="status ongoing">Ongoing</span></p>
+                </article>
 
+                <article class="theme-card">
+                    <h3>Representation Learning for Spectral Data</h3>
+                    <p><strong>Problem:</strong> Limited labels and domain shift reduce model transferability.</p>
+                    <p><strong>Method:</strong> Contrastive and multitask learning with curated benchmark splits.</p>
+                    <p><strong>Contribution:</strong> Reusable embeddings for annotation, retrieval, and interpretation
+                        tasks.</p>
+                    <p><strong>Status:</strong> <span class="status ongoing">Ongoing</span></p>
+                </article>
 
-                <div class="skill-category">
-                    <strong>Programming</strong>
-                    <div class="tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">C++</span>
-                        <span class="tag">SQL</span>
-                    </div>
-                </div>
+                <article class="theme-card">
+                    <h3>Reproducible Scientific Software</h3>
+                    <p><strong>Problem:</strong> Research code is often hard to validate and reuse.</p>
+                    <p><strong>Method:</strong> Versioned datasets, CI-tested pipelines, and transparent evaluation
+                        protocols.</p>
+                    <p><strong>Contribution:</strong> Durable tooling for reproducible computational metabolomics
+                        research.</p>
+                    <p><strong>Status:</strong> <span class="status published">Published Tooling</span></p>
+                </article>
+            </div> -->
+        <!-- 
+            <div class="outputs-strip" aria-label="Selected outputs">
+                <h3>Selected Outputs</h3>
+                <ul>
+                    <li>Research software components for retrieval and annotation workflows.</li>
+                    <li>Benchmark-centered evaluation pipelines for model comparison.</li>
+                    <li>Documentation and methods notes enabling replication and extension.</li>
+                </ul>
+            </div>
+        </section> -->
 
-                <div class="skill-category">
-                    <strong>Machine Learning & Data Science</strong>
-                    <div class="tags">
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">Lightning</span>
-                        <span class="tag">Scikit-learn</span>
-                        <span class="tag">HuggingFace</span>
-                        <span class="tag">NumPy</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Matplotlib</span>
-                        <span class="tag">Seaborn</span>
-                        <span class="tag">MLFlow</span>
-                        <span class="tag">xAI</span>
-                        <span class="tag">Spark</span>
-                        <span class="tag">Hadoop</span>
-                    </div>
-                </div>
+        <section id="publications" class="section-block">
+            <div class="section-head">
+                <p class="eyebrow">Publications</p>
+                <h2>Scholarly Output</h2>
+            </div>
 
-                <div class="skill-category">
-                    <strong>Web Development</strong>
-                    <div class="tags">
-                        <span class="tag">Django</span>
-                        <span class="tag">APIs</span>
-                        <span class="tag">REST</span>
-                    </div>
-                </div>
+            <div class="publications-controls">
+                <a href="https://orcid.org/0009-0007-2326-5457" target="_blank" rel="noopener noreferrer"
+                    class="button button-secondary">ORCID: 0009-0007-2326-5457</a>
+                <a href="https://scholar.google.com/citations?user=yuetOyvrR_wC" target="_blank"
+                    rel="noopener noreferrer" class="button button-secondary">Google Scholar</a>
+            </div>
 
-                <div class="skill-category">
-                    <strong>Tools & Platforms</strong>
-                    <div class="tags">
-                        <span class="tag">Git</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">OpenMP</span>
-                        <span class="tag">Confluence</span>
-                        <span class="tag">Jira</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <strong>Languages</strong>
-                    <ul class="language-list">
-                        <li><strong>German</strong> <span class="level">Native</span></li>
-                        <li><strong>English</strong> <span class="level">Fluent (C1)</span></li>
-                        <li><strong>Spanish</strong> <span class="level">A2</span></li>
-                        <li><strong>Russian</strong> <span class="level">B2</span></li>
-                        <li><strong>Japanese</strong> <span class="level">Basic</span></li>
+            <div id="publications-list" class="publication-groups">
+                <article>
+                    <h3>Loading publications...</h3>
+                    <ul>
+                        <li>Rendering manual publication entries.</li>
                     </ul>
-                </div>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="projects-container">
-            <!-- Project Genre Prediction -->
-            <div class="project-card">
-                <a href="https://github.com/RaykKretzschmar/LyricGenrePrediction" target="_blank">
-                    <h3>Lyric Genre Prediction</h3>
-                </a>
-                <p>Predicts music genres based on song lyrics using machine learning techniques. Implemented in Jupyter
-                    Notebook.</p>
-                <span class="hashtags">#MachineLearning #NLP #PyTorch</span>
+        <section id="software-data" class="section-block section-alt">
+            <div class="section-head">
+                <p class="eyebrow">Software and Data</p>
+                <h2>Repositories</h2>
+                <p>Research software and data assets are prioritized over general side projects.<br>
+                    For more projects please visit my <a href="https://github.com/RaykKretzschmar" target="_blank"
+                        rel="noopener noreferrer">GitHub profile</a>.</p>
             </div>
 
-            <!-- Gravity Simulation -->
-            <div class="project-card" id="gravity-project-card">
-                <div class="card-content">
-                    <h3>Gravity Simulation</h3>
-                    <p>Interactive N-body gravity simulation running in your browser. Create planets and watch them
-                        interact!</p>
-                    <button class="play-btn" id="play-gravity-btn">Play Now</button>
-                    <span class="hashtags">#JavaScript #Canvas #Physics</span>
-                </div>
-                <div class="simulation-container" id="gravity-sim-container" style="display: none;">
-                    <button class="close-sim-btn" id="close-gravity-btn">
-                        <i class="bi bi-x-lg"></i> Close
-                    </button>
-                    <div class="sim-controls">
-                        <p>Drag and release to launch objects. Collisions create debris.</p>
-                    </div>
-                    <canvas id="inlineSimCanvas"></canvas>
-                </div>
+            <div class="software-grid">
+
+                <article class="software-card">
+                    <h3>LightningIR</h3>
+                    <p>One-stop shop for fine-tuning and running neural ranking models.</p>
+                    <p><b>Contributions:</b> Implemented retrieval models, conducted experiments, and improved
+                        documentation.</p>
+                    <p><strong>Status:</strong> <span class="status published">Published</span></p>
+                    <a href="https://lightning-ir.webis.de/index.html" target="_blank" rel="noopener noreferrer"
+                        class="repo-link">Open repository project</a>
+                </article>
+
+                <article class="software-card de-emphasized">
+                    <h3>Gravity Simulator</h3>
+                    <p>Interactive N-body sandbox with orbital dynamics, collision merging, and debris fragments.</p>
+                    <p>Click-drag to launch bodies with velocity vectors and pan the camera with WASD or arrow keys.</p>
+                    <p><strong>Status:</strong> <span class="status published">Available</span></p>
+                    <a href="gravity.html" class="repo-link" id="open-gravity-sim">Open gravity simulation</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="cv" class="section-block">
+            <div class="section-head">
+                <p class="eyebrow">CV</p>
+                <h2>Academic Profile</h2>
+                <p>Structured for academic evaluation with optional concise industry-facing documents.</p>
             </div>
 
-            <!-- Project Confluence -->
-            <div class="project-card">
-                <a href="https://github.com/RaykKretzschmar/changeIssueContributorConfluence" target="_blank">
-                    <h3>Change Issue Contributor for Confluence</h3>
-                </a>
-                <p>A Python project that automates changing issue contributors in Confluence.</p>
-                <span class="hashtags">#Python #Automation #Confluence</span>
+            <div class="cv-grid">
+                <article>
+                    <h3>Education</h3>
+                    <ul>
+                        <li>M.Sc. Computational and Data Science<br>Friedrich Schiller University Jena</li>
+                        <li>B.Sc. Bioinformatics<br>Friedrich Schiller University Jena</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Positions</h3>
+                    <ul>
+                        <li><b>Currently:</b> Research Associate at FSU Jena (Böckerlab)<br>Computational Metabolomics
+                        </li>
+                        <li><b>Previously:</b> Scientific Assistant at FSU Jena (Webis Group)<br>Information Retrieval
+                        </li>
+                        <li><b>Previously:</b> Student Assistant at DLR (Machine Learning Group)<br>Explainable Machine
+                            Learning</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Funding</h3>
+                    <ul>
+                        <li>ERC Advanced Grant: BindingShadows</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Teaching and Service</h3>
+                    <ul>
+                        <li>Open lab and coursework supervision in efficient and parallel computing</li>
+                        <li>Evaluation and feedback on weekly student submissions</li>
+                    </ul>
+                </article>
             </div>
 
-            <!-- Project Image Processing -->
-            <div class="project-card">
-                <a href="https://github.com/RaykKretzschmar/Algorithm_Engineering" target="_blank">
-                    <h3>Image Processing Program</h3>
-                </a>
-                <p>A tool designed to enhance images through various processing techniques. It utilizes C++ and OpenMP
-                    for parallel processing.</p>
-                <span class="hashtags">#C++ #ImageProcessing #OpenMP</span>
+            <div class="cv-actions">
+                <a href="ressources/Resume_Rayk_Kretzschmar.pdf" target="_blank" rel="noopener noreferrer"
+                    class="button button-primary">CV (EN)</a>
+                <a href="ressources/Lebenslauf_Rayk_Kretzschmar.pdf" target="_blank" rel="noopener noreferrer"
+                    class="button button-secondary">Lebenslauf (DE)</a>
+            </div>
+        </section>
+
+        <section id="talks-teaching" class="section-block section-alt">
+            <div class="section-head">
+                <p class="eyebrow">Talks and Teaching</p>
+                <h2>Scientific Communication</h2>
+                <p>Invited talks, posters, and educational contributions in progress and over time.</p>
             </div>
 
-            <!-- Project FeWo-Verwaltung -->
-            <div class="project-card">
-                <a href="https://github.com/RaykKretzschmar/FeWo-Verwaltung" target="_blank">
-                    <h3>FeWo-Verwaltung</h3>
-                </a>
-                <p>A customer and apartment management system to help small rental businesses manage their customers and
-                    apartments.</p><br>
-                <a href="https://fewo.rayk.dev" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open FeWo-Verwaltung website">
-                    <img src="images/fewo_verwaltung.png" alt="FeWo-Verwaltung Preview" class="project-img">
-                </a>
-                <span class="hashtags">#JavaScript #Python #Django #CustomerManagement #Automation</span>
+            <div class="talks-grid">
+                <article>
+                    <h3>Invited Talks</h3>
+                    <ul>
+                        <li>Updating as new invitations are confirmed.</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Posters</h3>
+                    <ul>
+                        <li><strong>AI in Cancer Research</strong><br>Presented at the AI Summer School, FSU Jena (2023)
+                        </li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Lectures and Tutorials</h3>
+                    <ul>
+                        <li>Hands-on support and instruction for efficient and parallel computing courses.</li>
+                    </ul>
+                </article>
+                <article>
+                    <h3>Supervision and Mentoring</h3>
+                    <ul>
+                        <li>Open lab support for project-based student work.</li>
+                    </ul>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <h2>Information</h2>
-        <p>Rayk Kretzschmar<br>
-            07743 Jena<br>
-            Germany</p>
-        <p><a href="privacy-en.html">Privacy Policy</a> | <a href="privacy-de.html">Datenschutzerklärung</a></p>
+        <section id="contact" class="section-block">
+            <div class="section-head">
+                <p class="eyebrow">Contact</p>
+                <h2>Get in Touch</h2>
+                <p>If you want to contact me for whatever reason, please use the form below.</p>
+            </div>
 
-        <div class="contact-form-container">
-            <h3>Contact Me</h3>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <!-- Honeypot field for spam protection -->
-                <div style="display: none;">
-                    <label for="website">Website</label>
-                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                </div>
-                <button type="submit" class="cta-button">Send Message</button>
-            </form>
-        </div>
-    </section>
+            <div class="contact-grid">
+                <article class="contact-card">
+                    <h3>Contact</h3>
+                    <p>Rayk Kretzschmar</p>
+                    <p>Friedrich Schiller University Jena</p>
+                    <p>07743 Jena, Germany</p>
+                    <p>
+                        <a href="privacy-en.html">Privacy Policy</a>
+                        <span aria-hidden="true">|</span>
+                        <a href="privacy-de.html">Datenschutzerklärung</a>
+                    </p>
+                </article>
 
-    <!-- Chat Widget -->
-    <div class="chat-widget">
-        <button class="chat-toggle-btn" id="chat-toggle-btn" aria-label="Open Chat">
+                <article class="contact-card">
+                    <h3>Contact Form</h3>
+                    <form id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="honeypot" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        <button type="submit" class="button button-primary button-full">Send Message</button>
+                        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                    </form>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Rayk Kretzschmar. Research profile in computational metabolomics and bioinformatics.</p>
+    </footer>
+
+    <div class="chat-widget" aria-live="polite">
+        <button class="chat-toggle-btn" id="chat-toggle-btn" aria-label="Open AI Clone Chat">
             <i class="bi bi-chat-dots-fill"></i>
         </button>
-        <div class="chat-window" id="chat-window">
+        <div class="chat-window" id="chat-window" role="dialog" aria-label="AI clone chat window" aria-modal="false">
             <div class="chat-header">
-                <h3><i class="bi bi-robot"></i> Rayk's AI Clone</h3>
-                <button class="chat-close-btn" id="chat-close-btn" aria-label="Close Chat">
+                <h3><i class="bi bi-robot"></i> Rayk AI Clone</h3>
+                <button class="chat-close-btn" id="chat-close-btn" aria-label="Close AI Clone Chat">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
             <div class="chat-messages" id="chat-messages">
                 <div class="message bot">
-                    Hello! I'm Rayk's digital clone. Ask me anything about my projects, skills, or experience!
+                    Hello! I am Rayk's AI clone. Ask me about research, projects, publications, or background.
                 </div>
                 <div class="typing-indicator" id="typing-indicator">
                     <span></span><span></span><span></span>
                 </div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Ask me something...">
+                <input type="text" id="chat-input" placeholder="Ask something about Rayk..." aria-label="Chat input">
                 <button class="chat-send-btn" id="chat-send-btn" aria-label="Send Message">
                     <i class="bi bi-send-fill"></i>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gravity-modal" class="gravity-modal" hidden aria-hidden="true">
+        <div class="gravity-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="gravity-modal-title">
+            <div class="gravity-modal-header">
+                <h3 id="gravity-modal-title">Gravity Simulator</h3>
+                <button id="gravity-modal-close" class="gravity-modal-close" type="button"
+                    aria-label="Close gravity simulator">Close</button>
+            </div>
+            <p class="gravity-modal-help">Click and drag to launch new bodies. Move the camera with arrow keys or WASD.
+            </p>
+            <div id="gravity-modal-canvas-wrap" class="gravity-canvas-wrap">
+                <canvas id="gravity-modal-canvas" aria-label="Embedded gravity simulation"></canvas>
             </div>
         </div>
     </div>
