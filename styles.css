@@ -398,12 +398,37 @@ section {
 
 .software-card {
     grid-column: span 6;
+    display: flex;
+    flex-direction: column;
 }
 
 .software-card a {
     color: var(--accent-strong);
     font-weight: 600;
     text-underline-offset: 2px;
+}
+
+.software-card .repo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: auto auto 0;
+    padding: 0.46rem 0.92rem;
+    border: 1px solid var(--accent-strong);
+    border-radius: 999px;
+    background-color: var(--surface);
+    color: var(--accent-strong);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.software-card .repo-link:hover,
+.software-card .repo-link:focus-visible {
+    background-color: var(--accent-soft);
+    color: var(--accent-strong);
+    transform: translateY(-1px);
+    outline: none;
 }
 
 .software-card.de-emphasized {
