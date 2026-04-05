@@ -218,7 +218,7 @@
                     <p>Interactive N-body sandbox with orbital dynamics, collision merging, and debris fragments.</p>
                     <p>Click-drag to launch bodies with velocity vectors and pan the camera with WASD or arrow keys.</p>
                     <p><strong>Status:</strong> <span class="status published">Available</span></p>
-                    <a href="gravity.html" class="repo-link">Open gravity simulation</a>
+                    <a href="gravity.html" class="repo-link" id="open-gravity-sim">Open gravity simulation</a>
                 </article>
             </div>
         </section>
@@ -387,6 +387,20 @@
         </div>
     </div>
 
+    <div id="gravity-modal" class="gravity-modal" hidden aria-hidden="true">
+        <div class="gravity-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="gravity-modal-title">
+            <div class="gravity-modal-header">
+                <h3 id="gravity-modal-title">Gravity Simulator</h3>
+                <button id="gravity-modal-close" class="gravity-modal-close" type="button" aria-label="Close gravity simulator">Close</button>
+            </div>
+            <p class="gravity-modal-help">Click and drag to launch new bodies. Move the camera with arrow keys or WASD.</p>
+            <div id="gravity-modal-canvas-wrap" class="gravity-canvas-wrap">
+                <canvas id="gravity-modal-canvas" aria-label="Embedded gravity simulation"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="gravity.js"></script>
     <script src="script.js"></script>
 </body>
 

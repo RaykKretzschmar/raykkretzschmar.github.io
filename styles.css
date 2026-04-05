@@ -435,6 +435,93 @@ section {
     opacity: 0.88;
 }
 
+body.gravity-modal-open {
+    overflow: hidden;
+}
+
+.gravity-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2200;
+    display: grid;
+    place-items: center;
+    background: rgba(12, 20, 30, 0.55);
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+}
+
+.gravity-modal[hidden] {
+    display: none;
+}
+
+.gravity-modal-dialog {
+    width: min(880px, 96vw);
+    max-height: 88vh;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(20, 28, 39, 0.96), rgba(7, 12, 19, 0.96));
+    box-shadow: 0 30px 80px rgba(2, 8, 16, 0.5);
+    color: #f3f7ff;
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.gravity-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.gravity-modal-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #f9fbff;
+}
+
+.gravity-modal-help {
+    margin: 0;
+    font-size: 0.92rem;
+    color: rgba(236, 241, 251, 0.9);
+}
+
+.gravity-modal-close {
+    border: 1px solid rgba(235, 244, 255, 0.35);
+    border-radius: 999px;
+    padding: 0.4rem 0.82rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f6fbff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.gravity-modal-close:hover,
+.gravity-modal-close:focus-visible {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.gravity-canvas-wrap {
+    position: relative;
+    width: 100%;
+    min-height: min(60vh, 560px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #000;
+}
+
+.gravity-canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .cv-grid article,
 .talks-grid article {
     grid-column: span 6;
@@ -677,6 +764,15 @@ body>footer {
     .hero-content h1 {
         font-size: 2rem;
     }
+
+    .gravity-modal-dialog {
+        width: min(92vw, 760px);
+        max-height: 90vh;
+    }
+
+    .gravity-canvas-wrap {
+        min-height: min(56vh, 430px);
+    }
 }
 
 @media (max-width: 560px) {
@@ -699,5 +795,19 @@ body>footer {
 
     .section-head h2 {
         font-size: 1.75rem;
+    }
+
+    .gravity-modal {
+        padding: 0.5rem;
+    }
+
+    .gravity-modal-dialog {
+        width: 100%;
+        border-radius: 14px;
+        padding: 0.7rem;
+    }
+
+    .gravity-canvas-wrap {
+        min-height: 50vh;
     }
 }

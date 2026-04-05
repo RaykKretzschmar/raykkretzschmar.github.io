@@ -61,6 +61,61 @@ function setupMobileMenu() {
     });
 }
 
+function setupGravityModal() {
+    const trigger = document.getElementById('open-gravity-sim');
+    const modal = document.getElementById('gravity-modal');
+    const closeButton = document.getElementById('gravity-modal-close');
+
+    if (!trigger || !modal || !closeButton || typeof GravitySimulation === 'undefined') {
+        return;
+    }
+
+    let gravitySim = null;
+
+    function openModal(event) {
+        event.preventDefault();
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('gravity-modal-open');
+
+        if (!gravitySim) {
+            gravitySim = new GravitySimulation('gravity-modal-canvas', {
+                containerId: 'gravity-modal-canvas-wrap'
+            });
+        }
+
+        gravitySim.resizeCanvas();
+        gravitySim.start();
+        closeButton.focus();
+    }
+
+    function closeModal() {
+        if (gravitySim) {
+            gravitySim.stop();
+        }
+
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('gravity-modal-open');
+        trigger.focus();
+    }
+
+    trigger.addEventListener('click', openModal);
+    closeButton.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !modal.hidden) {
+            closeModal();
+        }
+    });
+}
+
 function inferPublicationCategory(workType = '') {
     const normalized = String(workType).toLowerCase();
 
@@ -616,6 +671,7 @@ async function sendChatMessage() {
 
 document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
+    setupGravityModal();
     setupPublicationsRefresh();
     setupContactForm();
     setupChatWidget();
