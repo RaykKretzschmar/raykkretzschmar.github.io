@@ -174,14 +174,32 @@ section {
         linear-gradient(135deg, rgba(21, 34, 56, 0.94), rgba(20, 83, 80, 0.95));
     color: #f7f4ea;
     display: grid;
-    grid-template-columns: 1.45fr 1fr;
+    grid-template-columns: auto 1.25fr 1fr;
+    align-items: center;
     gap: 1.5rem;
     box-shadow: var(--shadow);
+}
+
+.hero-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-20px);
 }
 
 .hero-content h1 {
     font-size: clamp(2rem, 5vw, 3.2rem);
     margin-bottom: 1rem;
+}
+
+.profile-image {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    object-position: center 0%;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
 }
 
 .hero-content .mission {
@@ -743,6 +761,11 @@ body>footer {
 
     .hero-section {
         grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .hero-profile {
+        justify-content: flex-start;
     }
 }
 
@@ -763,6 +786,11 @@ body>footer {
 
     .hero-content h1 {
         font-size: 2rem;
+    }
+
+    .profile-image {
+        width: 140px;
+        height: 140px;
     }
 
     .gravity-modal-dialog {
@@ -795,6 +823,11 @@ body>footer {
 
     .section-head h2 {
         font-size: 1.75rem;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
     }
 
     .gravity-modal {
