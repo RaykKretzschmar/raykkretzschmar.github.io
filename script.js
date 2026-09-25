@@ -5,6 +5,23 @@ const PUBLICATIONS_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 const PUBLICATIONS_FETCH_TIMEOUT_MS = 9000;
 
 const MANUAL_PUBLICATIONS = {
+    Conference: [
+        {
+            title: 'Evaluating Pre-training Objectives for TITE',
+            authors: ['Ferdinand Schlatt', 'Rayk Kretzschmar', 'Matthias Hagen'],
+            topics: ['Information Retrieval', 'Pre-training', 'Efficient Language Models'],
+            year: '2026',
+            venue: 'CLEF 2026, Lecture Notes in Computer Science',
+            pages: '154–168',
+            externalIds: [
+                {
+                    type: 'DOI',
+                    value: '10.1007/978-3-032-39150-6_12',
+                    url: 'https://doi.org/10.1007/978-3-032-39150-6_12'
+                }
+            ]
+        }
+    ],
     Thesis: [
         {
             title: 'Evaluating pre-training techniques for single-vector encoder models',
@@ -318,13 +335,16 @@ function renderPublicationGroups(publicationsByType) {
                     const topicsText = entry.topics && entry.topics.length > 0
                         ? entry.topics.join(', ')
                         : 'Topic not listed';
+                    const publicationDetails = [entry.year, entry.venue, entry.pages ? `pp. ${entry.pages}` : '']
+                        .filter(Boolean)
+                        .join(' · ');
 
                     return `
                         <li>
                             <span class="pub-title">${escapeHtml(entry.title)}</span>
                             <span class="pub-authors">Authors: ${escapeHtml(authorsText)}</span>
                             <span class="pub-topics">Topics: ${escapeHtml(topicsText)}</span>
-                            <span class="pub-meta">${escapeHtml(entry.year || 'Year not provided')}</span>
+                            <span class="pub-meta">${escapeHtml(publicationDetails || 'Publication details not provided')}</span>
                             <span class="status published">Published</span>
                             <p class="contribution-note">${externalLink}</p>
                         </li>
